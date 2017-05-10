@@ -98,7 +98,7 @@ BandStruct  Bands [] =
   { (char *)"160M", (uint32_t)1810e3, (uint32_t)2000e3, (uint32_t)1500e3, (uint32_t)1860e3  }, // (uint32_t) to prevent > warning: narrowing conversion of '1.86e+6' from 'double' to 'uint32_t {aka long unsigned int}' inside { } [-Wnarrowing]
   { (char *)" 80M", (uint32_t)3500e3, (uint32_t)4000e3, (uint32_t)3500e3, (uint32_t)3650e3  }, // (char *) to prevent > warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
   { (char *)" 40M", (uint32_t)7000e3, (uint32_t)7300e3, (uint32_t)7000e3, (uint32_t)7100e3  },
-  { (char *)" 30M", (uint32_t)10100e3, (uint32_t)10150e3, (uint32_t)11000e3, (uint32_t)10100e3  },
+  { (char *)" 30M", (uint32_t)10100e3, (uint32_t)10150e3, (uint32_t)10000e3, (uint32_t)10100e3  },
   { (char *)" 20M", (uint32_t)14000e3, (uint32_t)14350e3, (uint32_t)14000e3, (uint32_t)14175e3  },
   { (char *)" 17M", (uint32_t)18068e3, (uint32_t)18168e3, (uint32_t)18000e3, (uint32_t)18100e3  },
   { (char *)" 15M", (uint32_t)21000e3, (uint32_t)21450e3, (uint32_t)21000e3, (uint32_t)21225e3  },
