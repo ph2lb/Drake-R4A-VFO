@@ -14,6 +14,7 @@
  * ------------------------------------------------------------------------
  * Revision : 
  *  - 2017-may-9  0.1 initial version 
+ *  - 2017-may-29 0.2 changed VFO direction.
  * ------------------------------------------------------------------------
  * Hardware used : 
  *  - Arduino Uno R3 
@@ -251,9 +252,9 @@ void setFreq()
  
 
   // now we know what we want, so scale it back to the 5Mhz - 5.5Mhz freq
-  uint32_t frequency = Bands[currentBandIndex].Freq - Bands[currentBandIndex].FreqBase; 
-  uint32_t draker4freq = frequency + vfofreqlowerlimit - negfreqoffset + posfreqoffset - 1024 + rit;
- 
+  uint32_t frequency = Bands[currentBandIndex].Freq - Bands[currentBandIndex].FreqBase;  
+  uint32_t draker4freq = (vfofrequpperlimit - vfofreqlowerlimit) - frequency + vfofreqlowerlimit -  negfreqoffset + posfreqoffset - 1024 + rit;
+
   ad.setfreq(draker4freq); 
 } 
 
