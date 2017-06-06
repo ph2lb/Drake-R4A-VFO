@@ -15,6 +15,8 @@
  * Revision : 
  *  - 2017-may-9  0.1 initial version 
  *  - 2017-may-29 0.2 changed VFO direction.
+ *  - 2017-jun-6  0.3 changed VFO set for frequency injecten instead of IF.
+ 
  * ------------------------------------------------------------------------
  * Hardware used : 
  *  - Arduino Uno R3 
@@ -30,6 +32,23 @@
  *  - add more sourcode comment
  *  - add debounce for the keys  
  * ------------------------------------------------------------------------ 
+ 
+ Band                Injection Frequency in mHz               band coverage in mHz         Subtract 5.645 IF frequency
+ 160                     7.142 - 7.638                                     1.5 - 2.0                                 1.497  - 1.993
+  80                     9.145 - 9.641                                     3.5 - 4.0                                 3.49 - 3.996
+  40                    12.646 - 13.141                                  7.0 - 7.5                                 7.001 - 7.496
+  30                    15.338 - 15.833                                 9.7 - 10.2                                9.693 - 10.188
+  20                    19.646 - 20.141                                 14.0 - 14.5                             14.001 - 14.486
+  15                    26.645 - 27.141                                 21.0 - 21.5                             21.000 - 21.496
+  10a                  33.643 - 34.141                                 28.0 - 28.5                             27.998 - 28.496
+  10b                  34.141 - 34.645                                 28.5 - 29.0                             27.998 - 29.000
+
+Interpolating for 12 and 17:
+   
+   17                   23.645 - 24.145                                 18.0 - 18.5                              18.000 - 18.500
+   12                   30.145 - 30.645                                 24.5 - 25.0                              24.500 - 25.000
+ 
+ 
  */
 
 // choose one of below
@@ -249,12 +268,10 @@ void updateEncoder()
 // function to set the AD9850 to the VFO frequency depending on bandplan.
 void setFreq()
 { 
+  uint32_t iffrequency = 5645e3;
+  uint32_t frequency = Bands[currentBandIndex].Freq;
+  uint32_t draker4freq = iffrequency + frequency -  negfreqoffset + posfreqoffset - 1024 + rit;
  
-
-  // now we know what we want, so scale it back to the 5Mhz - 5.5Mhz freq
-  uint32_t frequency = Bands[currentBandIndex].Freq - Bands[currentBandIndex].FreqBase;  
-  uint32_t draker4freq = (vfofrequpperlimit - vfofreqlowerlimit) - frequency + vfofreqlowerlimit -  negfreqoffset + posfreqoffset - 1024 + rit;
-
   ad.setfreq(draker4freq); 
 } 
 
